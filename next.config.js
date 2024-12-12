@@ -1,6 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  images: {
+    domains: [
+      "xomusic.supabase.co", // Replace with your actual Supabase project domain
+      "xomusic.supabase.in", // Add both .co and .in domains for Supabase
+    ],
+  },
   async headers() {
     return [
       {
@@ -14,22 +20,6 @@ const nextConfig = {
       },
     ];
   },
-  webpack: (config, { isServer }) => {
-    config.resolve.fallback = {
-      fs: false,
-      net: false,
-      tls: false,
-      punycode: false,
-    };
-    if (!isServer) {
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        punycode: false,
-      };
-    }
-    return config;
-  },
-  output: "standalone",
 };
 
 module.exports = nextConfig;
